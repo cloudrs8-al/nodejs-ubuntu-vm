@@ -1,25 +1,16 @@
 {
-  "name": "proot-ubuntu-container-engine",
-  "version": "1.0.0",
-  "description": "An interactive, browser-accessible Ubuntu userspace environment powered by PRoot and WebSockets.",
-  "main": "index.js",
+  "name": "nodejs-ubuntu-vm",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Browser-accessible Ubuntu userspace using PRoot and WebSockets",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": [
-    "proot",
-    "ubuntu",
-    "terminal",
-    "websocket",
-    "interactive",
-    "shell"
-  ],
-  "author": "ImGunpoint",
-  "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "ws": "^8.18.0"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }

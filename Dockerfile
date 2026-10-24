@@ -1,29 +1,38 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV NODE_ENV=production
+ENV PORT=7860
 
-# Install basics + node + git
-RUN apt-get update && apt-get install -y \
-    curl \
-    git \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    build-essential
+    curl \
+    tar \
+    bash \
+    git \
+    procps \
+    coreutils \
+    findutils \
+    util-linux \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js (LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+# Install Node.js 20
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource.sh \
+    && bash /tmp/nodesource.sh \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -f /tmp/nodesource.sh \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create app directory
 WORKDIR /app
 
-# Clone your repo
-RUN git clone https://github.com/IamGunpoint/nodejs-ubuntu-vm.git .
+# Install dependencies from this repository
+COPY package*.json ./
+RUN npm install --omit=dev
 
-# Install dependencies
-RUN npm install || true
+# Copy your actual project files; don't clone a different repository
+COPY . .
 
-# Expose port (change if your server uses different)
 EXPOSE 7860
 
-# Run server.js
 CMD ["node", "server.js"]

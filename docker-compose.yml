@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   app:
     build:
@@ -8,11 +6,14 @@ services:
     container_name: node-ubuntu-vm
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "7860:7860"
     environment:
       NODE_ENV: production
+      PORT: "7860"
     volumes:
-      - .:/app
-      - /app/node_modules
-    working_dir: /app
-    command: node server.js
+      - ubuntu_bin:/app/bin
+      - ubuntu_rootfs:/app/ubuntu-22-rootfs
+
+volumes:
+  ubuntu_bin:
+  ubuntu_rootfs:
