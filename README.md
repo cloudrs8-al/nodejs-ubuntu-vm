@@ -4,8 +4,8 @@
 
 🚀 **An interactive, lightweight, browser-accessible virtualization engine.**
 
-👤 **Operator:** ImGunpoint  
-🛠️ **Engineered By:** ImGunpoint
+👤 **Operator:** BananaGejmr
+🛠️ **Engineered By:** BananaGejmr
 
 ---
 
